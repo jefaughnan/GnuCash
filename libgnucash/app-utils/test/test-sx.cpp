@@ -138,6 +138,8 @@ test_once()
     g_object_unref(model);
     success("model unref");
     remove_sx(lonely);
+    g_date_free (when);
+    g_date_free (end);
 }
 
 static GncSxInstance*
@@ -215,6 +217,8 @@ test_state_changes()
 
     g_object_unref(model);
     remove_sx(foo);
+    g_date_free (start);
+    g_date_free (end);
 }
 
 static void
@@ -241,6 +245,7 @@ make_one_transaction_end(TTInfo **tti, SchedXaction *sx)
     xaccSchedXactionSetTemplateTrans(sx, txns, book);
     gnc_ttinfo_free(*tti);
     *tti = NULL;
+    g_list_free (txns);
 }
 
 static void

@@ -8,11 +8,11 @@
 # mocsa <csaba@feltoltve.hu>, 2023.
 msgid ""
 msgstr ""
-"Project-Id-Version: GnuCash 4.8\n"
+"Project-Id-Version: GnuCash 5.4\n"
 "Report-Msgid-Bugs-To: https://bugs.gnucash.org/enter_bug."
 "cgi?product=GnuCash&component=Translations\n"
-"POT-Creation-Date: 2021-12-05 20:11+0100\n"
-"PO-Revision-Date: 2023-07-30 15:05+0000\n"
+"POT-Creation-Date: 2023-09-25 08:00+0200\n"
+"PO-Revision-Date: 2023-10-13 04:15+0000\n"
 "Last-Translator: Szia Tomi <sziatomi01@gmail.com>\n"
 "Language-Team: Hungarian <https://hosted.weblate.org/projects/gnucash/"
 "glossary/hu/>\n"
@@ -21,13 +21,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.0-dev\n"
+"X-Generator: Weblate 5.1-dev\n"
 
-#. "English Definition (Dear translator: This file will never be visible to the user! It should only serve as a tool for you, the translator. Nothing more.)"
-msgid "Term (Dear translator: This file will never be visible to the user!)"
-msgstr ""
-"Kifejezés (Kedves fordító! Ez a fájl sohasem lesz látható a felhasználók "
-"számára!)"
+#. "English Definition (Dear translators: This file will never be visible to normal users! It should only serve as a tool for translators. E.g. matching terms from this file are displayed in Weblate's Translation pages of other GnuCash components like the program.)"
+msgid "Term"
+msgstr "Kifejezés"
 
 #. "Opening and closing quote symbols and optionally their key combos like [altgr]+[Y]/[X]. Define the preferred style of quotation, see https://en.wikipedia.org/wiki/Quotation_mark#Summary_table"
 msgid "\"\""
@@ -37,7 +35,7 @@ msgstr "„”"
 msgid "account"
 msgstr "számla"
 
-#. "An alphanumerical key of an account in GnuCash, not at the bank, can be used to sort. Some templates provide them or the user can enter them."
+#. "An alphanumerical code applied to accounts for sorting. Some jurisdictions mandate codes and some GnuCash book templates include codes as part of the tree structure. Account codes can be set and changed in the Edit Account dialog."
 msgid "account code"
 msgstr "számlakód"
 
@@ -49,7 +47,7 @@ msgstr "számlahierarchia"
 msgid "account name"
 msgstr "számlanév"
 
-#. "The left side of the balance sheet in T account form shows the application of funds in form of assets. Because it contains only assets use assets directly. Complement: Passive. See also: Report Form"
+#. "The grouping of accounts whose balance increases with a debit (left side of the balance sheet in T account form). Complement: Passive. See also: Report Form"
 msgid "account type: Active"
 msgstr "Aktív"
 
@@ -109,7 +107,7 @@ msgstr "megtakarítás"
 msgid "account type: Stock"
 msgstr "Részvény"
 
-#. "This account type (new in gnucash-2.4.0) is used when exchanging or trading amounts from one currency into another"
+#. "This account type is used when exchanging or trading amounts from one currency into another"
 msgid "account type: trading"
 msgstr "kereskedés"
 
@@ -243,11 +241,11 @@ msgstr "bank"
 
 #. "A written statement of money owed for goods or services supplied. In Gnucash, a 'bill' is a statement that we received (from a vendor), whereas an 'invoice' is one that we sent out (to a customer)."
 msgid "bill"
-msgstr "bejövő számla"
+msgstr "bejövőszámla"
 
 #. "see invoice owner"
 msgid "bill owner"
-msgstr "a bejövő számla tulajdonosa"
+msgstr "a bejövőszámla tulajdonosa"
 
 #. "Conditions on paying a bill. Both an invoice and a bill have billing terms. For example, you can have 'terms' of 'Net-30', where the bill is due in full in 30 days."
 msgid "billing terms"
@@ -309,7 +307,7 @@ msgstr "árutőzsde"
 msgid "commodity option: fraction"
 msgstr "címlet"
 
-#. "e.g. USD, DEM"
+#. "e.g. USD, EUR"
 msgid "commodity option: Symbol"
 msgstr "Szimbólum"
 
@@ -471,7 +469,7 @@ msgstr "kamat"
 
 #. "A list of goods sold or services provided together with the prices charged; see also: a bill. In Gnucash, an 'invoice' is a statement that we sent out (to a customer), whereas a 'bill' is one that we received (from a vendor)."
 msgid "invoice"
-msgstr "kimenő számla"
+msgstr "kimenőszámla"
 
 #. "In business accounting: Jobs are a mechanism by which you can group multiple invoices or bills that belong to the same customer or vendor. The job describes a (larger) piece of work or a task undertaken on order, for which one or many invoices or bills will be issued."
 msgid "job"
@@ -513,7 +511,7 @@ msgstr "összefésülés"
 msgid "marker"
 msgstr "jelölő"
 
-#. "1. Some text annotation, but this meaning isn't used inside gnucash. 2. In the Customer summary report: The ratio of profit vs. sales, i.e. the profit amount divided by the sales amount, shown in percent."
+#. "1. Some text annotation, but this meaning is rarely used inside gnucash. 2. In the Customer summary report: The ratio of profit vs. sales, i.e. the profit amount divided by the sales amount, shown in percent."
 msgid "markup"
 msgstr "árrés"
 
@@ -537,7 +535,7 @@ msgstr "változó kamatlábú"
 msgid "mortgage: FRM"
 msgstr "fix kamatlábú"
 
-#. "e.g. USD, DEM, see Currency."
+#. "e.g. USD, EUR, see Currency."
 msgid "national currency"
 msgstr "nemzeti fizetőeszköz"
 
@@ -587,8 +585,7 @@ msgstr "árva"
 
 #. "The customer to (or employee or vendor from) which this invoice is sent - or short your business partner."
 msgid "owner (of bill, invoice or expense voucher)"
-msgstr ""
-"benyújtó, kiállító (a kimenő- és bejövőszámlának vagy költségutalványnak)"
+msgstr "kiállító (a kimenő- és bejövőszámlának vagy költségutalványnak)"
 
 #. "A secret phrase that one needs to know in order to get access to a user account "
 msgid "passphrase"
@@ -836,11 +833,11 @@ msgstr "átutalás (főnév)"
 
 #. "The account where an amount is transferred to"
 msgid "transfer account"
-msgstr "átutalási számla"
+msgstr "célszámla"
 
 #. "To move money from one account to another. Will create a transaction."
 msgid "transfer, to (register toolbar)"
-msgstr "átvitel (számlaregiszter eszköztár)"
+msgstr "átutal (számlaregiszter eszköztár)"
 
 #. "The trial balance is a worksheet on which you list all your general ledger accounts and their debit or credit balance. It is a tool that is used to alert you to errors in your books. The total debits must equal the total credits. If they don't equal, you know you have an error that must be tracked down."
 msgid "trial balance (report)"
@@ -873,15 +870,3 @@ msgstr "bizonylat"
 #. "see debit"
 msgid "withdraw (in the reconcile dialog)"
 msgstr "visszavonás (az egyeztető párbeszédpanelen)"
-
-msgid "stock"
-msgstr "részvény"
-
-msgid "due"
-msgstr "esedékes"
-
-msgid "Online"
-msgstr "Online"
-
-msgid "Direct Debit"
-msgstr "Fizetési megbízás (bejövő számlák automatikus fizetése)"

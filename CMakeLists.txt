@@ -2,8 +2,13 @@
 
 cmake_minimum_required (VERSION 3.14.5)
 
+# CMake 3.15+ Python3_FIND_STRATEGY=LOCATION
+if (POLICY CMP0094)
+  cmake_policy(SET CMP0094 NEW)
+endif()
+
 project (gnucash
-    VERSION 5.3
+    VERSION 5.4
 )
 
 enable_testing()
@@ -95,8 +100,6 @@ if (NOT DEFINED GNC_DBD_DIR)
   set(GNC_DBD_DIR $ENV{GNC_DBD_DIR} CACHE PATH "Hint for location of libdbi-drivers.")
 endif()
 set(PKGLIBDIR ${CMAKE_INSTALL_LIBDIR}/gnucash)
-set(TEST_MYSQL_URL "" CACHE STRING "MySQL database URL for testing")
-set(TEST_PGSQL_URL "" CACHE STRING "PgSQL database URL for testing")
 
 set(DATADIR_BUILD    ${CMAKE_BINARY_DIR}/${DATADIRNAME})
 string(REPLACE ${CMAKE_INSTALL_PREFIX} "" LIBDIR_BUILD ${LIBDIR})
@@ -494,6 +497,9 @@ endif()
 
 if (WITH_PYTHON)
   set (PYTHON_MIN_VERSION 3.6.0)
+  if (NOT DEFINED Python3_FIND_UNVERSIONED_NAMES)
+    set (Python3_FIND_UNVERSIONED_NAMES FIRST)
+  endif()
   find_package (Python3 ${PYTHON_MIN_VERSION} COMPONENTS Interpreter Development)
   if (NOT Python3_FOUND)
     message(SEND_ERROR "Python support enabled, but Python3 interpreter and/or libaries not found.")

@@ -341,7 +341,8 @@ template<class OptType,
 std::istream& operator>>(std::istream& iss, OptType& opt)
 {
     if constexpr (std::is_same_v<std::decay_t<decltype(opt.get_value())>, const _gncOwner*> ||
-                  std::is_same_v<std::decay_t<decltype(opt.get_value())>, const _QofQuery*>)
+                  std::is_same_v<std::decay_t<decltype(opt.get_value())>, const _QofQuery*> ||
+                  std::is_same_v<std::decay_t<decltype(opt.get_value())>, GncOptionDateFormat>)
         return iss;
     else
     {
@@ -898,7 +899,9 @@ operator<< <GncOptionAccountListValue>(std::ostream& oss,
             first = false;
         else
             oss << " ";
-        oss << guid_to_string(&value);
+        char strbuff[GUID_ENCODING_LENGTH+1];
+        guid_to_string_buff (&value, strbuff);
+        oss << strbuff;
     }
     return oss;
 }

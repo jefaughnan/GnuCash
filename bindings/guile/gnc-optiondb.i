@@ -319,6 +319,12 @@ scm_from_value<GncOptionReportPlacementVec>(GncOptionReportPlacementVec value)
     return scm_reverse(s_list);
 }
 
+template <> inline SCM
+scm_from_value<GncOptionDateFormat>(GncOptionDateFormat value)
+{
+    return SCM_BOOL_F;
+}
+
 static std::string
 scm_color_list_to_string(SCM list)
 {
@@ -564,7 +570,6 @@ gnc_option_test_book_destroy(QofBook* book)
 %ignore operator>>(std::istream&, GncOption&);
 %ignore GncOption::_get_option();
 
-
 %rename(gnc_register_date_option_set)
     gnc_register_date_option(GncOptionDBPtr&, const char*, const char*,
                              const char*, const char*, RelativeDatePeriodVec&,
@@ -804,7 +809,8 @@ wrap_unique_ptr(GncOptionDBPtr, GncOptionDB);
 %ignore gnc_register_taxtable_option(GncOptionDB*, const char*, const char*, const char*, const char*, GncTaxTable*);
 %ignore gnc_register_counter_option(GncOptionDB*, const char*, const char*, const char*, const char*, double);
 %ignore gnc_register_counter_format_option(GncOptionDB*, const char*, const char*, const char*, const char*, std::string);
-%ignore gnc_register_dateformat_option(GncOptionDB*, const char*, const char*, const char*, const char*, std::string);
+%ignore gnc_register_dateformat_option(GncOptionDB*, const char*, const char*, const char*, const char*, GncOptionDateFormat&&);
+%ignore gnc_register_dateformat_option(GncOptionDBPtr&, const char*, const char*, const char*, const char*, GncOptionDateFormat&&);
 %ignore gnc_register_date_option(GncOptionDB*, const char*, const char*, const char*, const char*, RelativeDatePeriod, RelativeDateUI);
 %ignore gnc_register_date_option(GncOptionDB*, const char*, const char*, const char*, const char*, time64, RelativeDateUI);
 %ignore gnc_register_date_option(GncOptionDB*, const char*, const char*, const char*, const char*, RelativeDatePeriodVec, bool);
@@ -1226,9 +1232,10 @@ inline SCM return_scm_value(ValueType value)
                     if (guid_list.empty())
                         return scm_simple_format(SCM_BOOL_F, list_format_str, scm_list_1(no_value));
                     SCM string_list{SCM_EOL};
+                    char guid_str[GUID_ENCODING_LENGTH+1];
                     for(auto guid : guid_list)
                     {
-                        auto guid_str{guid_to_string(&guid)};
+                        guid_to_string_buff (&guid, guid_str);
                         auto guid_scm{scm_from_utf8_string(guid_str)};
                         string_list = scm_cons(guid_scm, string_list);
                     }

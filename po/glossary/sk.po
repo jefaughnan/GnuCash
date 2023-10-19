@@ -5,14 +5,15 @@
 # Juraj Korec <euro777@gmail.com>, 2008.
 # Zdenko Podobny <zdenop@gmail.com>, 2008.
 # Dullus <dullus@gmail.com>, 2022.
+# Zdenko Podobný <zdenop@gmail.com>, 2023.
 msgid ""
 msgstr ""
-"Project-Id-Version: GnuCash 4.8\n"
+"Project-Id-Version: GnuCash 5.4\n"
 "Report-Msgid-Bugs-To: https://bugs.gnucash.org/enter_bug.cgi?"
 "product=GnuCash&component=Translations\n"
-"POT-Creation-Date: 2021-12-05 20:11+0100\n"
-"PO-Revision-Date: 2022-01-07 11:54+0000\n"
-"Last-Translator: Dullus <dullus@gmail.com>\n"
+"POT-Creation-Date: 2023-09-25 08:00+0200\n"
+"PO-Revision-Date: 2023-09-13 19:17+0000\n"
+"Last-Translator: Zdenko Podobný <zdenop@gmail.com>\n"
 "Language-Team: Slovak <https://hosted.weblate.org/projects/gnucash/glossary/"
 "sk/>\n"
 "Language: sk\n"
@@ -20,10 +21,10 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Weblate 4.10.1\n"
+"X-Generator: Weblate 5.0.1-dev\n"
 
-#. "English Definition (Dear translator: This file will never be visible to the user! It should only serve as a tool for you, the translator. Nothing more.)"
-msgid "Term (Dear translator: This file will never be visible to the user!)"
+#. "English Definition (Dear translators: This file will never be visible to normal users! It should only serve as a tool for translators. E.g. matching terms from this file are displayed in Weblate's Translation pages of other GnuCash components like the program.)"
+msgid "Term"
 msgstr "Termín"
 
 #. "Opening and closing quote symbols and optionally their key combos like [altgr]+[Y]/[X]. Define the preferred style of quotation, see https://en.wikipedia.org/wiki/Quotation_mark#Summary_table"
@@ -34,7 +35,7 @@ msgstr ""
 msgid "account"
 msgstr "účet"
 
-#. "An alphanumerical key of an account in GnuCash, not at the bank, can be used to sort. Some templates provide them or the user can enter them."
+#. "An alphanumerical code applied to accounts for sorting. Some jurisdictions mandate codes and some GnuCash book templates include codes as part of the tree structure. Account codes can be set and changed in the Edit Account dialog."
 msgid "account code"
 msgstr "účtovný kód"
 
@@ -46,7 +47,7 @@ msgstr "účtovná hierarchia"
 msgid "account name"
 msgstr "názov účtu"
 
-#. "The left side of the balance sheet in T account form shows the application of funds in form of assets. Because it contains only assets use assets directly. Complement: Passive. See also: Report Form"
+#. "The grouping of accounts whose balance increases with a debit (left side of the balance sheet in T account form). Complement: Passive. See also: Report Form"
 msgid "account type: Active"
 msgstr "account type: Aktívny"
 
@@ -106,7 +107,7 @@ msgstr "account type: sporiaci účet"
 msgid "account type: Stock"
 msgstr "account type: Akcie"
 
-#. "This account type (new in gnucash-2.4.0) is used when exchanging or trading amounts from one currency into another"
+#. "This account type is used when exchanging or trading amounts from one currency into another"
 msgid "account type: trading"
 msgstr "account type: obchodný účet"
 
@@ -311,7 +312,7 @@ msgstr "zoznam komodít"
 msgid "commodity option: fraction"
 msgstr "commodity option: časť"
 
-#. "e.g. USD, DEM"
+#. "e.g. USD, EUR"
 msgid "commodity option: Symbol"
 msgstr "commodity option: Symbol"
 
@@ -512,7 +513,7 @@ msgstr "Stratené účty"
 
 #. "A particular collection of items that were bought in one transaction. A lot is typically formed when the item is bought, and is closed when the item is sold out. Needed e.g. for U.S. tax purposes."
 msgid "Lot"
-msgstr "Súbor"
+msgstr ""
 
 #. "Combine two books into one (see book)."
 msgid "merge, to"
@@ -522,7 +523,7 @@ msgstr "zlúčiť"
 msgid "marker"
 msgstr "zvýrazňovač"
 
-#. "1. Some text annotation, but this meaning isn't used inside gnucash. 2. In the Customer summary report: The ratio of profit vs. sales, i.e. the profit amount divided by the sales amount, shown in percent."
+#. "1. Some text annotation, but this meaning is rarely used inside gnucash. 2. In the Customer summary report: The ratio of profit vs. sales, i.e. the profit amount divided by the sales amount, shown in percent."
 #, fuzzy
 msgid "markup"
 msgstr "zvýrazňovač"
@@ -533,7 +534,7 @@ msgstr "MDI režim"
 
 #. "One textfield per split that should help you remember what this split was about."
 msgid "Memo"
-msgstr "Poznámka"
+msgstr "Memo"
 
 #. "(a) An agreement by which money is lent by a bank for buying a house or other property, the property being the security. (b) A sum of money lent in this way."
 msgid "Mortgage"
@@ -551,7 +552,7 @@ msgstr "Hypotéka"
 msgid "mortgage: FRM"
 msgstr "Hypotéka"
 
-#. "e.g. USD, DEM, see Currency."
+#. "e.g. USD, EUR, see Currency."
 msgid "national currency"
 msgstr "národná mena"
 
@@ -667,7 +668,7 @@ msgstr "zisk"
 
 #. "OBSOLETE. This report was renamed to 'income statement' on 2004-07-13. Old definition: A list that shows the amount of money spent compared with the amount earned by a business in a particular period"
 msgid "Profit & Loss"
-msgstr "Zisk a strata"
+msgstr "Ziska a strata"
 
 #. "-"
 msgid "quick-fill"
@@ -771,13 +772,11 @@ msgstr "rozdelenie"
 
 #. "Alias of 'shares'"
 msgid "stocks"
-msgstr ""
+msgstr "akcie"
 
 #. "Sometimes one old share gets replaced by multiple new like 1 OLD @100¤ by 2 NEW @50¤"
-#, fuzzy
-#| msgid "split"
 msgid "stock split"
-msgstr "rozdelenie"
+msgstr "rozdelenie akcie"
 
 #. "This sets the particular design or shape of a report."
 msgid "style sheet"
@@ -893,15 +892,3 @@ msgstr "náhrada hotovostných výdajov"
 #. "see debit"
 msgid "withdraw (in the reconcile dialog)"
 msgstr "výber (v dialógu vysporiadania)"
-
-msgid "stock"
-msgstr ""
-
-msgid "due"
-msgstr ""
-
-msgid "Online"
-msgstr ""
-
-msgid "Direct Debit"
-msgstr ""

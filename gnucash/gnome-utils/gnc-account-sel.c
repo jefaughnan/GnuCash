@@ -25,6 +25,7 @@
 
 #include <config.h>
 
+#include <stdbool.h>
 #include <gtk/gtk.h>
 #include <glib/gi18n.h>
 
@@ -65,6 +66,7 @@ struct _GNCAccountSel
     GList *acctTypeFilters;
     GList *acctCommodityFilters;
     GList *acctExcludeList;
+    gnc_commodity *default_new_commodity;
 
     /* The state of this pointer also serves as a flag about what state
      * the widget is in WRT the new-account-button ability. */
@@ -542,37 +544,17 @@ icon_release_cb (GtkEntry *entry, GtkEntryIconPosition icon_pos,
 static gboolean
 account_is_included (GNCAccountSel *gas, Account *acc)
 {
-    gboolean included = TRUE;
-
-    if (gas->acctExcludeList)
-    {
-        if (g_list_find (gas->acctExcludeList, acc) != NULL)
-            included = FALSE;
-    }
+    if (gas->acctExcludeList && g_list_find (gas->acctExcludeList, acc))
+        return false;
 
     /* Filter as we've been configured to do. */
-    if (gas->acctTypeFilters)
-    {
-        /* g_list_find is the poor-mans '(member ...)', especially
-         * easy when the data pointers in the list are just casted
-         * account type identifiers. */
-        if (g_list_find (gas->acctTypeFilters,
-                         GINT_TO_POINTER(xaccAccountGetType (acc))) == NULL)
-        {
-            included = FALSE;
-        }
-    }
+    if (gas->acctTypeFilters && !g_list_find (gas->acctTypeFilters, GINT_TO_POINTER (xaccAccountGetType (acc))))
+        return false;
 
-    if (gas->acctCommodityFilters)
-    {
-        if (g_list_find_custom (gas->acctCommodityFilters,
-                                GINT_TO_POINTER(xaccAccountGetCommodity (acc)),
-                                gnc_commodity_compare_void) == NULL)
-        {
-            included = FALSE;
-        }
-    }
-    return included;
+    if (gas->acctCommodityFilters && !g_list_find (gas->acctCommodityFilters, xaccAccountGetCommodity (acc)))
+        return false;
+
+    return true;
 }
 
 static gboolean
@@ -580,21 +562,22 @@ account_is_visible_func (GtkTreeModel *model, GtkTreeIter *iter, gpointer user_d
 {
     GNCAccountSel *gas = GNC_ACCOUNT_SEL(user_data);
     Account *acc;
-    gboolean visible = TRUE;
 
     gtk_tree_model_get (GTK_TREE_MODEL(gas->store), iter, ACCT_COL_PTR, &acc, -1);
 
-    if (acc)
-    {
-        visible = account_is_included (gas, acc);
+    if (!acc)
+        return true;
 
-        if (gas->hide_placeholder && xaccAccountGetPlaceholder (acc))
-            visible = FALSE;
+    if (!account_is_included (gas, acc))
+        return false;
 
-        if (gas->hide_placeholder && xaccAccountIsHidden (acc))
-            visible = FALSE;
-    }
-    return visible;
+    if (gas->hide_placeholder && xaccAccountGetPlaceholder (acc))
+        return false;
+
+    if (gas->hide_placeholder && xaccAccountIsHidden (acc))
+        return false;
+
+    return true;
 }
 
 static void
@@ -671,6 +654,7 @@ gnc_account_sel_init (GNCAccountSel *gas)
 
     gtk_orientable_set_orientation (GTK_ORIENTABLE(gas), GTK_ORIENTATION_HORIZONTAL);
 
+    gas->default_new_commodity = NULL;
     gas->acctTypeFilters = NULL;
     gas->acctCommodityFilters = NULL;
     gas->acctExcludeList = NULL;
@@ -913,6 +897,14 @@ gnc_account_sel_set_acct_exclude_filter (GNCAccountSel *gas,
     update_entry_and_refilter (gas);
 }
 
+void
+gnc_account_sel_set_default_new_commodity (GNCAccountSel *gas, gnc_commodity *new_commodity)
+{
+    g_return_if_fail (gas);
+    g_return_if_fail (GNC_IS_COMMODITY (new_commodity));
+    gas->default_new_commodity = new_commodity;
+}
+
 static void
 gnc_account_sel_finalize (GObject *object)
 {
@@ -1015,14 +1007,14 @@ gas_new_account_click (GtkButton *b, gpointer user_data)
 
     if (gas->isModal)
     {
-        Account *account = gnc_ui_new_accounts_from_name_window_with_types (parent, NULL,
-                                                                            gas->acctTypeFilters);
+        Account *account = gnc_ui_new_accounts_from_name_with_defaults (parent, NULL, gas->acctTypeFilters,
+                                                                        gas->default_new_commodity, NULL);
         if (account)
             gnc_account_sel_set_account (gas, account, FALSE);
     }
     else
-        gnc_ui_new_account_with_types (parent, gnc_get_current_book(),
-                                       gas->acctTypeFilters);
+        gnc_ui_new_account_with_types_and_commodity (parent, gnc_get_current_book(),
+                                                     gas->acctTypeFilters, gas->default_new_commodity);
 }
 
 gint

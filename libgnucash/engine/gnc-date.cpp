@@ -187,8 +187,8 @@ gnc_gmtime (const time64 *secs)
 {
     try
     {
-        auto time = static_cast<struct tm*>(calloc(1, sizeof(struct tm)));
         GncDateTime gncdt(*secs);
+        auto time = static_cast<struct tm*>(calloc(1, sizeof(struct tm)));
         *time = gncdt.utc_tm();
         return time;
     }
@@ -752,7 +752,11 @@ qof_scan_date_internal (const char *buff, int *day, int *month, int *year,
             struct tm thetime;
             /* Parse time string. */
             memset(&thetime, -1, sizeof(struct tm));
-            strptime (buff, normalize_format(GNC_D_FMT).c_str(), &thetime);
+            char *strv = strptime (buff, normalize_format(GNC_D_FMT).c_str(),
+                                   &thetime);
+
+            if (!strv) // Parse failed, continuing gives the wrong result.
+                return FALSE;
 
             if (third_field)
             {
